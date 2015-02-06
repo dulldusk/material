@@ -23,7 +23,7 @@
               ng-if="searchText"\
               ng-click="$mdAutocompleteCtrl.clear()">\
               <span aria-hidden="true">X</span>\
-              <span class="visuallyhidden">Clear</span>\
+              <span class="visually-hidden">Clear</span>\
               </button>\
           <md-progress-linear ng-if="$mdAutocompleteCtrl.loading" md-mode="indeterminate"></md-progress-linear>\
         </md-autocomplete-wrap>\
@@ -37,7 +37,7 @@
           </li>\
         </ul>\
         <aria-status\
-            class="visuallyhidden"\
+            class="visually-hidden"\
             aria-atomic="true"\
             role="status"\
             aria-live="polite">\
