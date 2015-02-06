@@ -4,7 +4,6 @@ angular
 
 function DemoCtrl ($timeout, $q) {
   var self = this;
-  //noinspection JSUnusedGlobalSymbols
   this.selectedItem = null;
   this.searchText = null;
   this.states = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Deleware,\
@@ -14,7 +13,6 @@ function DemoCtrl ($timeout, $q) {
         North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
         South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
         Wisconsin, Wyoming'.split(/, +/g).map(function (state) { return { value: state.toLowerCase(), display: state }; });
-  //noinspection JSUnusedGlobalSymbols
   this.getItems = getItems;
 
   function getItems (query) {
