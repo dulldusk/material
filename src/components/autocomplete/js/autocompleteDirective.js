@@ -4,7 +4,7 @@
       .module('material.components.autocomplete')
       .directive('mdAutocomplete', MdAutocomplete);
 
-  function MdAutocomplete ($mdUtil) {
+  function MdAutocomplete () {
     return {
       template: '\
         <md-autocomplete-wrap role="listbox">\
@@ -13,6 +13,10 @@
               ng-keydown="$mdAutocompleteCtrl.keydown($event)"\
               placeholder="{{placeholder}}"\
               aria-label="{{placeholder}}"\
+              aria-autocomplete="list"\
+              aria-haspopup="true"\
+              aria-activedescendant=""\
+              aria-expanded="{{!$mdAutocompleteCtrl.hidden}}"\
               ng-keydown="$mdAutocompleteCtrl.onKeydown($event)"/>\
           <button\
               type="button"\
@@ -23,7 +27,7 @@
               </button>\
           <md-progress-linear ng-if="$mdAutocompleteCtrl.loading" md-mode="indeterminate"></md-progress-linear>\
         </md-autocomplete-wrap>\
-        <ul>\
+        <ul role="presentation">\
           <li ng-repeat="(index, item) in $mdAutocompleteCtrl.matches"\
               ng-class="{ selected: index === $mdAutocompleteCtrl.index }"\
               ng-if="searchText && !$mdAutocompleteCtrl.hidden"\
@@ -32,7 +36,11 @@
               md-list-item="$mdAutocompleteCtrl.itemName">\
           </li>\
         </ul>\
-        <aria-status class="visuallyhidden">\
+        <aria-status\
+            class="visuallyhidden"\
+            aria-atomic="true"\
+            role="status"\
+            aria-live="polite">\
           <p ng-repeat="item in $mdAutocompleteCtrl.matches">{{item.display}}</p>\
         </aria-status>',
       transclude: true,
@@ -44,32 +52,6 @@
         itemsExpr: '@mdItems',
         itemText: '@mdItemText',
         placeholder: '@placeholder'
-      },
-      link: function(scope, element, attr, MdAutocompleteCtrl) {
-        var input = element.find('input'),
-            list = element.find('ul'),
-            status = element.find('aria-status');
-
-        var listId = list.attr('id') || ('ul_' + $mdUtil.nextUid());
-
-        list.attr({
-          'id': listId,
-          'role': 'presentation'
-        });
-
-        input.attr({
-          'aria-owns': listId,
-          'aria-autocomplete': 'list',
-          'aria-haspopup': 'true',
-          'aria-expanded': !MdAutocompleteCtrl.hidden+'',
-          'aria-activedescendant': ''
-        });
-
-        status.attr({
-          'aria-atomic': 'true',
-          'role': 'status',
-          'aria-live': 'polite'
-        });
       }
     };
   }

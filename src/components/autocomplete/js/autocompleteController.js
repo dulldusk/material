@@ -11,8 +11,9 @@
         itemParts = $scope.itemsExpr.split(/\ in\ /i),
         itemExpr = itemParts[1],
         elements = {
-          main: $element[0],
-          ul:   $element[0].getElementsByTagName('ul')[0]
+          main:  $element[0],
+          ul:    $element[0].getElementsByTagName('ul')[0],
+          input: $element[0].getElementsByTagName('input')[0]
         },
         promise  = null,
         cache    = {};
@@ -34,6 +35,15 @@
     //-- start method definitions
     function init () {
       configureWatchers();
+      attachAriaAttributes();
+    }
+
+    function attachAriaAttributes () {
+      var ul = angular.element(elements.ul),
+          input = angular.element(elements.input),
+          id = ul.attr('id') || 'ul_' + $mdUtil.nextUid();
+      ul.attr('id', id);
+      input.attr('aria-owns', id);
     }
 
     function configureWatchers () {
