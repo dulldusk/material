@@ -2,9 +2,9 @@
   'use strict';
   angular
       .module('material.components.autocomplete')
-      .directive('mdListItem', MdAutocomplete);
+      .directive('mdListItem', MdListItem);
 
-  function MdAutocomplete ($compile, $mdUtil) {
+  function MdListItem ($compile, $mdUtil) {
     return {
       terminal: true,
       link: link,
