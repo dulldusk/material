@@ -5,10 +5,6 @@
       .directive('mdHighlightText', MdHighlight);
 
   function MdHighlight () {
-    return {
-      terminal: true,
-      controller: 'MdHighlightCtrl',
-      controllerAs: 'mdCtrl'
-    };
+    return { controller: 'MdHighlightCtrl' };
   }
 })();

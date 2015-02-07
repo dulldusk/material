@@ -18,15 +18,8 @@ function DemoCtrl ($timeout, $q) {
   function getItems (query) {
     if (!query) return [];
     var deferred = $q.defer();
-    var regex = new RegExp('^' + query.replace(/[\*\[\]\(\)\{}\\\^\$]/g, function (match) {
-          return '\\' + match;
-        }), 'i'),
-        results = [];
-    angular.forEach(self.states, function (state) {
-      if (state.value.match(regex)) {
-        results.push(state);
-      }
-    });
+    var lowercaseQuery = angular.lowercase(query);
+    var results = self.states.filter(function (state) { return state.value.indexOf(lowercaseQuery) === 0; });
     $timeout(function () { deferred.resolve(results); }, Math.random() * 1000, false);
     return deferred.promise;
   }

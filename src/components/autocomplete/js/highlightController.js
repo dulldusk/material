@@ -7,18 +7,15 @@
   function MdHighlightCtrl ($scope, $element, $interpolate) {
     var term = $element.attr('md-highlight-text'),
         text = $interpolate($element.text())($scope.$parent);
-    $scope.$watch(term, function (term, oldTerm) {
+    $scope.$watch(term, function (term) {
       var regex = new RegExp('^' + sanitize(term), 'i'),
-          html = text.replace(regex, function (match) {
-            return '<span class="highlight">' + match + '</span>';
-          });
+          html = text.replace(regex, '<span class="highlight">$&</span>');
       $element.html(html);
     });
 
     function sanitize (term) {
       if (!term) return term;
-      return term
-          .replace(/[\*\[\]\(\)\{\}\\\^\$]/g, function (match) { return '\\' + match; });
+      return term.replace(/[\*\[\]\(\)\{\}\\\^\$]/g, '\\$&');
     }
   }
 

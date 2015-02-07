@@ -16,8 +16,7 @@
               aria-autocomplete="list"\
               aria-haspopup="true"\
               aria-activedescendant=""\
-              aria-expanded="{{!$mdAutocompleteCtrl.hidden}}"\
-              ng-keydown="$mdAutocompleteCtrl.onKeydown($event)"/>\
+              aria-expanded="{{!$mdAutocompleteCtrl.hidden}}"/>\
           <button\
               type="button"\
               ng-if="searchText"\

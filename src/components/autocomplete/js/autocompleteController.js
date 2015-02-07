@@ -116,15 +116,15 @@
     }
 
     function isHidden () {
-      return self.matches.length === 1 && $scope.searchText === getValue(self.matches[0]);
+      return self.matches.length === 1 && $scope.searchText === getDisplayValue(self.matches[0]);
     }
 
-    function getValue (item) {
-      return item ? $scope.itemText ? item[$scope.itemText] : item : item;
+    function getDisplayValue (item) {
+      return (item && $scope.itemText) ? item[$scope.itemText] : item;
     }
 
     function select (index) {
-      $scope.searchText = getValue(self.matches[index]) || $scope.searchText;
+      $scope.searchText = getDisplayValue(self.matches[index]) || $scope.searchText;
       self.hidden  = true;
       self.index   = -1;
       self.matches = [];
