@@ -4,7 +4,7 @@
       .module('material.components.autocomplete')
       .controller('MdAutocompleteCtrl', MdAutocompleteCtrl);
 
-  function MdAutocompleteCtrl ($scope, $element, $timeout, $q, $mdUtil) {
+  function MdAutocompleteCtrl ($scope, $element, $timeout, $q, $mdUtil, $mdConstant) {
 
     //-- private variables
     var self = this,
@@ -35,10 +35,10 @@
     //-- start method definitions
     function init () {
       configureWatchers();
-      attachAriaAttributes();
+      configureAria();
     }
 
-    function attachAriaAttributes () {
+    function configureAria () {
       var ul = angular.element(elements.ul),
           input = angular.element(elements.input),
           id = ul.attr('id') || 'ul_' + $mdUtil.nextUid();
@@ -80,24 +80,24 @@
 
     function keydown (event) {
       switch (event.keyCode) {
-        case 40: //-- DOWN ARROW
+        case $mdConstant.KEY_CODE.DOWN_ARROW:
           if (self.loading) return;
           event.preventDefault();
           self.index = Math.min(self.index + 1, self.matches.length - 1);
           updateScroll();
           break;
-        case 38: //-- UP ARROW
+        case $mdConstant.KEY_CODE.UP_ARROW:
           if (self.loading) return;
           event.preventDefault();
           self.index = Math.max(0, self.index - 1);
           updateScroll();
           break;
-        case 13: //-- ENTER
+        case $mdConstant.KEY_CODE.ENTER:
           if (self.loading) return;
           event.preventDefault();
           select(self.index);
           break;
-        case 27: //-- ESC
+        case $mdConstant.KEY_CODE.ESCAPE:
           self.matches = [];
           self.hidden = true;
           self.index = -1;
